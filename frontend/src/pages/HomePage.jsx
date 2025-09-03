@@ -1,7 +1,8 @@
-import { Container, SimpleGrid, Text, VStack } from '@chakra-ui/react'
+import { Container, SimpleGrid, Text, VStack, Box } from '@chakra-ui/react'
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useProductStore } from '../store/product'
+import ProductCard from '../components/ProductCard'
 
 
 const HomePage = () => {
@@ -40,20 +41,16 @@ const HomePage = () => {
           )}
         </SimpleGrid>
 
-        <Text
-          fontSize='xl'
-          fontWeight='bold'
-          textAlign='center'
-          color='gray.500'
-        >
-          No products found 😢{" "}
-          <Link to={"/create"}>
-            <Text color='blue.500' _hover={{ textDecoration: "underline  " }}>
-              Create a new product
-            </Text>
-          </Link>
-        </Text>
-
+        {products.length === 0 && (
+          <Text fontSize='xl' fontWeight='bold' textAlign='center' color='gray.500'>
+            No products found 😢{" "}
+            <Link to={"/create"}>
+              <Box as="span" color='blue.500' _hover={{ textDecoration: "underline" }} cursor="pointer">
+                Create a new product
+              </Box>
+            </Link>
+          </Text>
+        )}
       </VStack>
     </Container>
   )
